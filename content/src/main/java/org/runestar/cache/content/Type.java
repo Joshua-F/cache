@@ -28,7 +28,7 @@ public enum Type {
     MAPELEMENT(59, 'µ'),
     MODEL(31, 'm'),
     NAMEDOBJ(13, 'O'),
-    NEWVAR('-'),
+    ENTITYOVERLAY('-'),
     NPC(32, 'n'),
     NPC_UID(38, 'u'),
     OBJ(33, 'o'),
@@ -92,7 +92,6 @@ public enum Type {
     }
 
     public static Type ofAuto(byte desc) {
-        if (desc == 0) return INT;
         Type value = VALUES.get(desc);
         if (value == null) {
             throw new IllegalStateException();
