@@ -8,7 +8,7 @@ public final class ParamType extends ConfigType {
 
     public boolean autodisable = true;
 
-    public byte type = 0;
+    public byte type = -1;
 
     public int defaultint = 0;
 

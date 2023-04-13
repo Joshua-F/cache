@@ -17,7 +17,9 @@ public final class ParamTypes {
         for (var file : cache.archive(ConfigType.ARCHIVE).group(ParamType.GROUP).files()) {
             var param = new ParamType();
             param.decode(file.data());
-            paramTypes.put(file.id(), Type.ofAuto(param.type).getLiteral());
+            if (param.type != -1) {
+                paramTypes.put(file.id(), Type.ofAuto(param.type).getLiteral());
+            }
         }
         return paramTypes;
     }
