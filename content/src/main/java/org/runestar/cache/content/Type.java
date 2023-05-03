@@ -19,6 +19,7 @@ public enum Type {
     ENUM(26, 'g'),
     FONTMETRICS(25, 'f'),
     GRAPHIC(23, 'd'),
+    IDKIT(10, 'K'),
     INT(0, 'i'),
     INTERFACE(97, 'a'),
     INV(39, 'v'),
