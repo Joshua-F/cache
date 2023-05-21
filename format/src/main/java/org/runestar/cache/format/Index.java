@@ -57,7 +57,7 @@ public final class Index {
             var fileId = 0;
             for (var f = 0; f < fileCount; f++) {
                 var fileNameHash = hasNames ? buf.getInt() : 0;
-                fileId += fileIds[a].get(f);
+                fileId += Short.toUnsignedInt(fileIds[a].get(f));
                 files[f] = new File(fileId, fileNameHash);
             }
             var groupNameHash = hasNames ? groupNameHashes.get(a) : 0;
