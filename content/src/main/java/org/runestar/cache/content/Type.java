@@ -27,6 +27,7 @@ public enum Type {
     LOCSHAPE(8, 'H'),
     MAPAREA(21, '`'),
     MAPELEMENT(59, 'µ'),
+    MIDI(11, 'M'),
     MODEL(31, 'm'),
     NAMEDOBJ(13, 'O'),
     ENTITYOVERLAY('-'),
