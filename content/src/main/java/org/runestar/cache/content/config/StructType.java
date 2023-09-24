@@ -6,7 +6,7 @@ import java.util.Map;
 
 public final class StructType extends ConfigType {
 
-    public static final int GROUP = 34;
+    public static final int GROUP = 26;
 
     public Map<Integer, Object> params = null;
 

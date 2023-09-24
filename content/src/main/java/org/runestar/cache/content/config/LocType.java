@@ -6,7 +6,7 @@ import java.util.Map;
 
 public final class LocType extends ConfigType {
 
-    public static final int GROUP = 6;
+    public static final int ARCHIVE = 16;
 
     public boolean isRotated = false;
 
@@ -95,6 +95,10 @@ public final class LocType extends ConfigType {
     public String name = "null";
 
     public final String[] op = new String[5];
+
+    public static int getId(int group, int file) {
+        return group * 256 + file;
+    }
 
     @Override protected void decode0(Input in) {
         while (true) {
@@ -197,6 +201,9 @@ public final class LocType extends ConfigType {
                     }
                     break;
                 }
+                case 60:
+                    /*mapfunction = */in.g2();
+                    break;
                 case 61:
                     category = in.g2();
                     break;
@@ -214,9 +221,6 @@ public final class LocType extends ConfigType {
                     break;
                 case 67:
                     resizeZ = in.g2();
-                    break;
-                case 68:
-                    mapSceneId = in.g2();
                     break;
                 case 69:
                     in.skip(1);
@@ -258,10 +262,15 @@ public final class LocType extends ConfigType {
                     hillChange = in.g1() * 256;
                     break;
                 case 82:
-                    mapIconId = in.g2();
+                    break;
+                case 88:
                     break;
                 case 89:
                     _b = false;
+                    break;
+                case 90:
+                    break;
+                case 91:
                     break;
                 case 77:
                 case 92: {
@@ -277,6 +286,20 @@ public final class LocType extends ConfigType {
                     multi[n + 1] = last;
                     break;
                 }
+                case 93:
+                    in.g2();
+                    break;
+                case 94:
+                    break;
+                case 95:
+                    break;
+                case 96:
+                    break;
+                case 97:
+                    break;
+                case 102:
+                    mapSceneId = in.g2();
+                    break;
                 case 249:
                     params = in.decodeParams();
                     break;

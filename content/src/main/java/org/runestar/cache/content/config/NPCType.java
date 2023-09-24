@@ -6,7 +6,7 @@ import java.util.Map;
 
 public final class NPCType extends ConfigType {
 
-    public static final int GROUP = 9;
+    public static final int ARCHIVE = 18;
 
     public int category = -1;
 
@@ -75,6 +75,10 @@ public final class NPCType extends ConfigType {
     public final String[] op = new String[5];
 
     public Map<Integer, Object> params = null;
+
+    public static int getId(int group, int file) {
+        return group * 128 + file;
+    }
 
     @Override protected void decode0(Input in) {
         while (true) {
@@ -176,24 +180,7 @@ public final class NPCType extends ConfigType {
                     contrast = in.g1s();
                     break;
                 case 102:
-                    int bits = in.g1();
-                    int length = 0;
-                    for (int i = bits; i != 0; i >>= 1) {
-                        ++length;
-                    }
-
-                    iconGroups = new int[length];
-                    iconIndices = new short[length];
-
-                    for (int i = 0; i < length; i++) {
-                        if ((bits & 1 << i) == 0) {
-                            iconGroups[i] = -1;
-                            iconIndices[i] = -1;
-                        } else {
-                            iconGroups[i] = in.gSmart2or4();
-                            iconIndices[i] = (short) in.gSmart1or2null();
-                        }
-                    }
+                    /*headicon = */in.g2();
                     break;
                 case 103:
                     _aw = in.g2();
@@ -205,25 +192,18 @@ public final class NPCType extends ConfigType {
                     _ag = false;
                     break;
                 case 111:
-                    follower = true;
+                    break;
+                case 113:
+                    in.g2();
+                    in.g2();
                     break;
                 case 114:
-                    in.g2();
+                    in.g1();
+                    in.g1();
                     break;
                 case 115:
-                    in.g2();
-                    in.g2();
-                    in.g2();
-                    in.g2();
-                    break;
-                case 116:
-                    in.g2();
-                    break;
-                case 117:
-                    in.g2();
-                    in.g2();
-                    in.g2();
-                    in.g2();
+                    in.g1();
+                    in.g1();
                     break;
                 case 106:
                 case 118: {
@@ -239,6 +219,34 @@ public final class NPCType extends ConfigType {
                     multi[n + 1] = last;
                     break;
                 }
+                case 119:
+                    in.g1();
+                    break;
+                case 121:
+                    int count = in.g1();
+                    for (int i = 0; i < count; i++) {
+                        in.g1();
+                        in.g1();
+                        in.g1();
+                        in.g1();
+                    }
+                    break;
+                case 122:
+                    in.g2();
+                    break;
+                case 123:
+                    in.g2();
+                    break;
+                case 127:
+                    /*bas = */in.g2();
+                    break;
+                case 134:
+                    /*readysound = */in.g2();
+                    /*crawlsound = */in.g2();
+                    /*walksound = */in.g2();
+                    /*runsound = */in.g2();
+                    /*soundradius = */in.g1();
+                    break;
                 case 249:
                     params = in.decodeParams();
                     break;

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public final class ObjType extends ConfigType {
 
-    public static final int GROUP = 10;
+    public static final int ARCHIVE = 19;
 
     public String name = "null";
 
@@ -72,7 +72,11 @@ public final class ObjType extends ConfigType {
 
     public int manwear3 = -1;
 
+    public int manwearxoff = 0;
+
     public int manwearyoff = 0;
+
+    public int manwearzoff = 0;
 
     public int manhead = -1;
 
@@ -84,7 +88,11 @@ public final class ObjType extends ConfigType {
 
     public int womanwear3 = -1;
 
+    public int womanwearxoff = 0;
+
     public int womanwearyoff = 0;
+
+    public int womanwearzoff = 0;
 
     public int womanhead = -1;
 
@@ -100,6 +108,10 @@ public final class ObjType extends ConfigType {
 
     public int shiftclickindex = -2;
 
+    public int lentlink = -1;
+
+    public int lenttemplate = -1;
+
     public int boughtlink = -1;
 
     public int boughttemplate = -1;
@@ -109,6 +121,10 @@ public final class ObjType extends ConfigType {
     public int placeholdertemplate = -1;
 
     public Map<Integer, Object> params = null;
+
+    public static int getId(int group, int file) {
+        return group * 256 + file;
+    }
 
     @Override protected void decode0(Input in) {
         while (true) {
@@ -154,14 +170,12 @@ public final class ObjType extends ConfigType {
                     break;
                 case 23:
                     manwear = in.g2();
-                    manwearyoff = in.g1();
                     break;
                 case 24:
                     manwear2 = in.g2();
                     break;
                 case 25:
                     womanwear = in.g2();
-                    womanwearyoff = in.g1();
                     break;
                 case 26:
                     womanwear2 = in.g2();
@@ -238,6 +252,9 @@ public final class ObjType extends ConfigType {
                 case 95:
                     zan2d = in.g2();
                     break;
+                case 96:
+                    /*dummyitem = */in.g1();
+                    break;
                 case 97:
                     certlink = in.g2();
                     break;
@@ -279,17 +296,21 @@ public final class ObjType extends ConfigType {
                 case 115:
                     team = in.g1();
                     break;
-                case 139:
-                    boughtlink = in.g2();
+                case 121:
+                    lentlink = in.g2();
                     break;
-                case 140:
-                    boughttemplate = in.g2();
+                case 122:
+                    lenttemplate = in.g2();
                     break;
-                case 148:
-                    placeholderlink = in.g2();
+                case 125:
+                    manwearxoff = in.g1();
+                    manwearyoff = in.g1();
+                    manwearzoff = in.g1();
                     break;
-                case 149:
-                    placeholdertemplate = in.g2();
+                case 126:
+                    womanwearxoff = in.g1();
+                    womanwearyoff = in.g1();
+                    womanwearzoff = in.g1();
                     break;
                 case 249:
                     params = in.decodeParams();
