@@ -312,6 +312,29 @@ public final class ObjType extends ConfigType {
                     womanwearyoff = in.g1();
                     womanwearzoff = in.g1();
                     break;
+                case 127:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 128:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 129:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 130:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 132: {
+                    int n = in.g1();
+                    for (int i = 0; i < n; i++) {
+                        in.g2();
+                    }
+                    break;
+                }
                 case 249:
                     params = in.decodeParams();
                     break;

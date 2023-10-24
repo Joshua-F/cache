@@ -24,7 +24,7 @@ public final class Cs2 {
 
             writeTsv(dir.resolve("param-types.tsv"), ParamTypes.get(cache));
 //            writeTsv(dir.resolve("dbtable-types.tsv"), DBTableTypes.get(cache));
-//            writeTsv(dir.resolve("maparea-names.tsv"), WorldMapArea.get(cache));
+            writeTsv(dir.resolve("maparea-names.tsv"), WorldMapArea.get(cache));
 
             var ne = new NameExtractor(cache);
             writeTsv(dir.resolve("loc-names.tsv"), ne.locs);

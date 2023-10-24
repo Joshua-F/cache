@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 public final class WorldMapArea {
 
-    private static final int WORLDMAPDATA = 19;
+    private static final int WORLDMAPDATA = 23;
 
     private WorldMapArea() {}
 

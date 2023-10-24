@@ -74,6 +74,8 @@ public final class NPCType extends ConfigType {
 
     public final String[] op = new String[5];
 
+    public final String[] memberop = new String[5];
+
     public Map<Integer, Object> params = null;
 
     public static int getId(int group, int file) {
@@ -237,8 +239,14 @@ public final class NPCType extends ConfigType {
                 case 123:
                     in.g2();
                     break;
+                case 125:
+                    in.g1s();
+                    break;
                 case 127:
                     /*bas = */in.g2();
+                    break;
+                case 128:
+                    in.g1();
                     break;
                 case 134:
                     /*readysound = */in.g2();
@@ -247,6 +255,49 @@ public final class NPCType extends ConfigType {
                     /*runsound = */in.g2();
                     /*soundradius = */in.g1();
                     break;
+                case 135:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 136:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 137:
+                    in.g2();
+                    break;
+                case 138:
+                    in.g2();
+                    break;
+                case 139:
+                    in.g2();
+                    break;
+                case 140:
+                    in.g1();
+                    break;
+                case 141:
+                    break;
+                case 142:
+                    in.g2();
+                    break;
+                case 143:
+                    break;
+                case 150:
+                case 151:
+                case 152:
+                case 153:
+                case 154: {
+                    var s = in.gjstr();
+                    if (!s.equalsIgnoreCase("Hidden")) memberop[code - 150] = s;
+                    break;
+                }
+                case 160: {
+                    var n = in.g1();
+                    for (int i = 0; i < n; i++) {
+                        in.g2();
+                    }
+                    break;
+                }
                 case 249:
                     params = in.decodeParams();
                     break;

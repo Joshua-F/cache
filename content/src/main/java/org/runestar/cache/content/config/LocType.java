@@ -96,6 +96,8 @@ public final class LocType extends ConfigType {
 
     public final String[] op = new String[5];
 
+    public final String[] memberop = new String[5];
+
     public static int getId(int group, int file) {
         return group * 256 + file;
     }
@@ -297,9 +299,54 @@ public final class LocType extends ConfigType {
                     break;
                 case 97:
                     break;
+                case 98:
+                    break;
+                case 99:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 100:
+                    in.g1();
+                    in.g2();
+                    break;
+                case 101:
+                    in.g1();
+                    break;
                 case 102:
                     mapSceneId = in.g2();
                     break;
+                case 103:
+                    break;
+                case 104:
+                    in.g1();
+                    break;
+                case 106: {
+                    var n = in.g1();
+                    for (int i = 0; i < n; i++) {
+                        in.g2();
+                        in.g1();
+                    }
+                    break;
+                }
+                case 107:
+                    in.g2();
+                    break;
+                case 150:
+                case 151:
+                case 152:
+                case 153:
+                case 154: {
+                    var s = in.gjstr();
+                    if (!s.equalsIgnoreCase("Hidden")) memberop[code - 150] = s;
+                    break;
+                }
+                case 160: {
+                    var n = in.g1();
+                    for (int i = 0; i < n; i++) {
+                        in.g2();
+                    }
+                    break;
+                }
                 case 249:
                     params = in.decodeParams();
                     break;

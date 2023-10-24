@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public enum Type {
     AREA(16, 'R'),
+    BAS(44, '€'),
     BOOLEAN(1, '1'),
     CATEGORY(41, 'y'),
     CHAR(42, 'z'),
