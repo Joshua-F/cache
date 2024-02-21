@@ -239,6 +239,12 @@ public final class NPCType extends ConfigType {
                     multi[n + 1] = last;
                     break;
                 }
+                case 122:
+                    follower = true;
+                    break;
+                case 123:
+                    // lowpriorityops
+                    break;
                 case 249:
                     params = in.decodeParams();
                     break;

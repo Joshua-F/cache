@@ -242,11 +242,13 @@ public final class LocType extends ConfigType {
                 case 78:
                     ambientSoundId = in.g2();
                     int4 = in.g1();
+                    in.g1();
                     break;
                 case 79: {
                     int5 = in.g2();
                     int6 = in.g2();
                     int4 = in.g1();
+                    in.g1();
                     int n = in.g1();
                     _av = new int[n];
                     for(int var5 = 0; var5 < n; var5++) {
