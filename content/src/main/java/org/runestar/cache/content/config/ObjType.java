@@ -10,6 +10,8 @@ public final class ObjType extends ConfigType {
 
     public String name = "null";
 
+    public String desc = null;
+
     public int category = -1;
 
     public int resizex = 128;
@@ -121,6 +123,9 @@ public final class ObjType extends ConfigType {
                     break;
                 case 2:
                     name = in.gjstr();
+                    break;
+                case 3:
+                    desc = in.gjstr();
                     break;
                 case 4:
                     zoom2d = in.g2();
