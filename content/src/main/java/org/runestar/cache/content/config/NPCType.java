@@ -76,6 +76,8 @@ public final class NPCType extends ConfigType {
 
     public Map<Integer, Object> params = null;
 
+    public final int[] stats = new int[]{1, 1, 1, 1, 1, 1};
+
     @Override protected void decode0(Input in) {
         while (true) {
             int code = in.g1();
@@ -154,6 +156,24 @@ public final class NPCType extends ConfigType {
                     }
                     break;
                 }
+                case 74:
+                    stats[0] = in.g2();
+                    break;
+                case 75:
+                    stats[1] = in.g2();
+                    break;
+                case 76:
+                    stats[2] = in.g2();
+                    break;
+                case 77:
+                    stats[3] = in.g2();
+                    break;
+                case 78:
+                    stats[4] = in.g2();
+                    break;
+                case 79:
+                    stats[5] = in.g2();
+                    break;
                 case 93:
                     drawMapDot = false;
                     break;
@@ -244,6 +264,9 @@ public final class NPCType extends ConfigType {
                     break;
                 case 123:
                     // lowpriorityops
+                    break;
+                case 124:
+                    /*overlayheight = */in.g2();
                     break;
                 case 249:
                     params = in.decodeParams();
