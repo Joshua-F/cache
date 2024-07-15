@@ -56,7 +56,9 @@ public final class LocType extends ConfigType {
 
     public boolean occlude = false;
 
-    public boolean _b = true;
+    public boolean randomAnimFrame = true;
+
+    public boolean fixLocAnimAfterLocChange = false;
 
     public int interactType = 2;
 
@@ -263,7 +265,10 @@ public final class LocType extends ConfigType {
                     mapIconId = in.g2();
                     break;
                 case 89:
-                    _b = false;
+                    randomAnimFrame = false;
+                    break;
+                case 90:
+                    fixLocAnimAfterLocChange = true;
                     break;
                 case 77:
                 case 92: {
