@@ -44,6 +44,7 @@ public enum Type {
     STRUCT(73, 'J'),
     SYNTH(14, 'P'),
     TOPLEVELINTERFACE(98, 'F'),
+    VARP(209, '7'),
     TYPE,
     ;
 
