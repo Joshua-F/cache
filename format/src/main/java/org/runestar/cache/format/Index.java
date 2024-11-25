@@ -35,33 +35,65 @@ public final class Index {
 
     public static Index decode(ByteBuffer buf) {
         var protocol = buf.get();
-        if (protocol != 5 && protocol != 6) throw new IllegalArgumentException();
+        if (protocol != 5 && protocol != 6 && protocol != 7) throw new IllegalArgumentException("" + protocol);
         var version = protocol >= 6 ? buf.getInt() : 0;
-        var hasNames = buf.get() != 0;
-        var groupCount = Short.toUnsignedInt(buf.getShort());
-        var groupIds = IO.getShortSlice(buf, groupCount);
+        var flags = buf.get();
+        var hasNames = (flags & 1) != 0;
+        var groupCount = protocol >= 7 ? IO.g2or4s(buf) : Short.toUnsignedInt(buf.getShort());
+        var groupIds = new int[groupCount];
+        if (protocol >= 7) {
+            for (int i = 0; i < groupCount; i++) {
+                groupIds[i] = IO.g2or4s(buf);
+            }
+        } else {
+            for (int i = 0; i < groupCount; i++) {
+                groupIds[i] = Short.toUnsignedInt(buf.getShort());
+            }
+        }
         var groupNameHashes = hasNames ? IO.getIntSlice(buf, groupCount) : null;
         var groupCrcs = IO.getIntSlice(buf, groupCount);
         var groupVersions = IO.getIntSlice(buf, groupCount);
-        var fileCounts = IO.getShortSlice(buf, groupCount);
-        var fileIds = new ShortBuffer[groupCount];
-        for (var a = 0; a < groupCount; a++) {
-            fileIds[a] = IO.getShortSlice(buf, Short.toUnsignedInt(fileCounts.get(a)));
+        var fileCounts = new int[groupCount];
+        var fileIds = new int[groupCount][];
+        if (protocol >= 7) {
+            for (int i = 0; i < groupCount; i++) {
+                fileCounts[i] = IO.g2or4s(buf);
+            }
+
+            for (int i = 0; i < groupCount; i++) {
+                int fileCount = fileCounts[i];
+                fileIds[i] = new int[fileCount];
+                for (int j = 0; j < fileCount; j++) {
+                    fileIds[i][j] = IO.g2or4s(buf);
+                }
+            }
+        } else {
+            for (int i = 0; i < groupCount; i++) {
+                fileCounts[i] = Short.toUnsignedInt(buf.getShort());
+            }
+
+            for (int i = 0; i < groupCount; i++) {
+                int fileCount = fileCounts[i];
+                fileIds[i] = new int[fileCount];
+                for (int j = 0; j < fileCount; j++) {
+                    fileIds[i][j] = Short.toUnsignedInt(buf.getShort());
+                }
+            }
         }
 
         var groups = new Group[groupCount];
         var groupId = 0;
         for (var a = 0; a < groupCount; a++) {
-            var fileCount = Short.toUnsignedInt(fileCounts.get(a));
+            var fileCount = fileCounts[a];
             var files = new File[fileCount];
             var fileId = 0;
             for (var f = 0; f < fileCount; f++) {
                 var fileNameHash = hasNames ? buf.getInt() : 0;
-                fileId += Short.toUnsignedInt(fileIds[a].get(f));
+                fileId += fileIds[a][f];
                 files[f] = new File(fileId, fileNameHash);
             }
             var groupNameHash = hasNames ? groupNameHashes.get(a) : 0;
-            groupId += groupIds.get(a);
+            groupId += groupIds[a];
             groups[a] = new Group(groupId, groupNameHash, groupCrcs.get(a), groupVersions.get(a), files);
         }
         return new Index(version, groups);

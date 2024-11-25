@@ -79,6 +79,10 @@ public final class IO {
         buf.putShort((short) (value >> 8)).put((byte) value);
     }
 
+    public static int g2or4s(ByteBuffer buf) {
+        return buf.get(buf.position()) < 0 ? buf.getInt() & Integer.MAX_VALUE : Short.toUnsignedInt(buf.getShort());
+    }
+
     public static int crc32(ByteBuffer buf) {
         var crc = new CRC32();
         crc.update(buf);
